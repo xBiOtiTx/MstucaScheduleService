@@ -1,5 +1,7 @@
 package schedule.rest;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -12,7 +14,7 @@ import schedule.Greeting;
 public class GreetingResrService {
 
 //    private static final String template = "Hello, %s!";
-//    private final AtomicLong counter = new AtomicLong();
+    private static final AtomicLong counter = new AtomicLong();
 //
 //    @RequestMapping("/greeting")
 //    public Greeting greeting(@RequestParam(value="name", defaultValue="World") String name) {
@@ -24,6 +26,12 @@ public class GreetingResrService {
 	@Path("/{param}")
 	@Produces("application/vnd.customer+json")
 	public Greeting printMessage(@PathParam("param") String msg) {
-		return new Greeting(0,"Hello!");
+		return new Greeting(0,"Hello(" + counter.incrementAndGet() + ")");
+	}
+	
+	@GET
+	@Path("/cron")
+	public void cron() {
+		counter.incrementAndGet();
 	}
 }
