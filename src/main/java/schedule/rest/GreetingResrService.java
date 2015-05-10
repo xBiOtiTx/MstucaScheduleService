@@ -26,7 +26,7 @@ public class GreetingResrService {
 	@Path("/{param}")
 	@Produces("application/vnd.customer+json")
 	public Greeting printMessage(@PathParam("param") String msg) {
-		return new Greeting(0,"Hello(" + counter.incrementAndGet() + ")");
+		return new Greeting((long) 0,"Hello(" + counter.incrementAndGet() + ")");
 	}
 	
 	@GET
