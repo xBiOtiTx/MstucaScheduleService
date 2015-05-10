@@ -15,6 +15,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
+import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+
 import schedule.Greeting;
 import schedule.entities.ELessonType;
 import schedule.entities.Group;
@@ -46,33 +49,33 @@ public class GroupRestService {
 
 		// Map<String, String> env = System.getenv();
 
-		// String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
-		// String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
-		// String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+		 String url = System.getenv("OPENSHIFT_MYSQL_DB_URL");
+		 String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		 String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
 		 
 		// items.add(new Group(url));
 		// items.add(new Group(username));
 		// items.add(new Group(password));
 		 
-		String s = "";
-		Map<String, String> env = System.getenv();
-		for (String envName : env.keySet()) {
-			//s += envName + "; ";
-			// s += String.format("%s=%s%n \n",
-			// envName,
-			// env.get(envName));
-			// System.out.format("%s=%s%n",
-			// envName,
-			// env.get(envName));
-			items.add(new Group(envName));
-		}
-		
+//		String s = "";
+//		Map<String, String> env = System.getenv();
+//		for (String envName : env.keySet()) {
+//			//s += envName + "; ";
+//			// s += String.format("%s=%s%n \n",
+//			// envName,
+//			// env.get(envName));
+//			// System.out.format("%s=%s%n",
+//			// envName,
+//			// env.get(envName));
+//			items.add(new Group(envName));
+//		}
+//		
 
 		// Connection connection = DriverManager.getConnection(url, username,
 		// password);
 
-		// ConnectionSource connectionSource = new JdbcConnectionSource(url);
-		// connectionSource.close();
+		 ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
+		 connectionSource.close();
 
 		// TableUtils.dropTable(connectionSource, Group.class, true);
 		// TableUtils.createTable(connectionSource, Group.class);
