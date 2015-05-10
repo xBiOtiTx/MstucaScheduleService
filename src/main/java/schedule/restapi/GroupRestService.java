@@ -36,23 +36,27 @@ public class GroupRestService {
 	@Path("/")
 	@Produces("application/vnd.customer+json")
 	public List<Group> getAll() throws Exception {
-		// List<Group> items = new ArrayList<>();
-		// for (int i = 0; i < 3; i++) {
-		// items.add(new Group("Group" + i));
-		// }
+		List<Group> items = new ArrayList<>();
+		for (int i = 0; i < 3; i++) {
+			items.add(new Group("Group" + i));
+		}
 		// return items;
 
 		// em.persist(new Greeting((long) 0, "null"));
 
 		// Map<String, String> env = System.getenv();
-		
-		//String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
-		//String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
-		//String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
-		
-		//Connection connection = DriverManager.getConnection(url, username,
-	   //         password);
-		
+
+		 String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
+		 String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		 String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+		 
+		 items.add(new Group(url));
+		 items.add(new Group(username));
+		 items.add(new Group(password));
+
+		// Connection connection = DriverManager.getConnection(url, username,
+		// password);
+
 		// ConnectionSource connectionSource = new JdbcConnectionSource(url);
 		// connectionSource.close();
 
@@ -66,7 +70,8 @@ public class GroupRestService {
 		// groupDao.create(group);
 		// }
 
-		return service.getAll();
+		return items;
+		// return service.getAll();
 	}
 
 	@GET
