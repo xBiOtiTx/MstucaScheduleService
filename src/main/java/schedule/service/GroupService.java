@@ -32,12 +32,7 @@ public class GroupService implements IService<Group> {
 			items.add(new Group("_Group" + i));
 		}
 
-		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
-		// Group group = groupDao.queryForId("ASD");
-		// if (group == null) {
-		// group = new Group("ASD");
-		// groupDao.create(group);
-		// }
+		
 		// String s = "";
 		// Map<String, String> env = System.getenv();
 		// for (String envName : env.keySet()) {
@@ -57,6 +52,15 @@ public class GroupService implements IService<Group> {
 		ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
 		TableUtils.dropTable(connectionSource, Group.class, true);
 		TableUtils.createTable(connectionSource, Group.class);
+		final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
+		Group group = groupDao.queryForId("ASD");
+		if (group == null) {
+			group = new Group("ASD");
+			groupDao.create(group);
+			group = groupDao.queryForId("ASD");
+		}
+		items.add(group);
+		
 		connectionSource.close();
 
 		return items;
