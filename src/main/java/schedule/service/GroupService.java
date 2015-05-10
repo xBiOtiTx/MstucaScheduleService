@@ -29,8 +29,42 @@ public class GroupService implements IService<Group> {
 	public List<Group> getAll() throws Exception {
 		List<Group> items = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
-			items.add(new Group("_Group" + i));
+			items.add(new Group("+Group" + i));
 		}
+
+		// String s = "";
+		// Map<String, String> env = System.getenv();
+		// for (String envName : env.keySet()) {
+		// s += envName + "; ";
+		// //s += String.format("%s=%s%n \n",
+		// // envName,
+		// // env.get(envName));
+		// // System.out.format("%s=%s%n",
+		// // envName,
+		// // env.get(envName));
+		// }
+		// items.add(new Group(s));
+
+		// Context initialContext = new InitialContext();
+		// DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
+		//
+		// ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
+		// TableUtils.dropTable(connectionSource, Group.class, true);
+		// TableUtils.createTable(connectionSource, Group.class);
+		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
+		// Group group = groupDao.queryForId("ASD");
+		// if (group == null) {
+		// group = new Group("ASD");
+		// groupDao.create(group);
+		// group = groupDao.queryForId("ASD");
+		// }
+		// if(group != null) {
+		// items.add(group);
+		// } else {
+		// items.add(new Group("error!"));
+		// }
+		//
+		// connectionSource.close();
 
 		return items;
 	}
