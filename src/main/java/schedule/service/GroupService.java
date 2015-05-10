@@ -41,18 +41,18 @@ public class GroupService implements IService<Group> {
 		//	group = new Group("ASD");
 		//	groupDao.create(group);
 		//}
-		String s = "";
-		Map<String, String> env = System.getenv();
-		for (String envName : env.keySet()) {
-			s += envName + "; ";
-			//s += String.format("%s=%s%n \n",
-           //         envName,
-           //         env.get(envName));
-           // System.out.format("%s=%s%n",
-           //                   envName,
-           //                   env.get(envName));
-        }
-		items.add(new Group(s));
+//		String s = "";
+//		Map<String, String> env = System.getenv();
+//		for (String envName : env.keySet()) {
+//			s += envName + "; ";
+//			//s += String.format("%s=%s%n \n",
+//           //         envName,
+//           //         env.get(envName));
+//           // System.out.format("%s=%s%n",
+//           //                   envName,
+//           //                   env.get(envName));
+//        }
+//		items.add(new Group(s));
 
 		return items;
 	}

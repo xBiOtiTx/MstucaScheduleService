@@ -1,8 +1,11 @@
 package schedule.restapi;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -26,8 +29,8 @@ public class GroupRestService {
 	@Inject
 	private IService<Group> service;
 
-	//@Inject
-	//private EntityManager em;
+	// @Inject
+	// private EntityManager em;
 
 	@GET
 	@Path("/")
@@ -38,8 +41,30 @@ public class GroupRestService {
 		// items.add(new Group("Group" + i));
 		// }
 		// return items;
+
+		// em.persist(new Greeting((long) 0, "null"));
+
+		// Map<String, String> env = System.getenv();
 		
-		//em.persist(new Greeting((long) 0, "null"));
+		String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
+		String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+		
+		Connection connection = DriverManager.getConnection(url, username,
+	            password);
+		
+		// ConnectionSource connectionSource = new JdbcConnectionSource(url);
+		// connectionSource.close();
+
+		// TableUtils.dropTable(connectionSource, Group.class, true);
+		// TableUtils.createTable(connectionSource, Group.class);
+
+		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
+		// Group group = groupDao.queryForId("ASD");
+		// if (group == null) {
+		// group = new Group("ASD");
+		// groupDao.create(group);
+		// }
 
 		return service.getAll();
 	}
