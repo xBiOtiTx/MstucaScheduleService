@@ -53,6 +53,9 @@ public class GroupRestService {
 		 String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
 		 String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
 		 
+		 //String databaseUrl = "jdbc:mysql://" + localhost + ":3306/my_db";
+		 url += "jdbc:";
+		 
 		// items.add(new Group(url));
 		// items.add(new Group(username));
 		// items.add(new Group(password));
