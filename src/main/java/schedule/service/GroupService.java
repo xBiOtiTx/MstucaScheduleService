@@ -59,7 +59,11 @@ public class GroupService implements IService<Group> {
 			groupDao.create(group);
 			group = groupDao.queryForId("ASD");
 		}
+		if(group != null) {
 		items.add(group);
+		} else {
+			items.add(new Group("error!"));
+		}
 		
 		connectionSource.close();
 
