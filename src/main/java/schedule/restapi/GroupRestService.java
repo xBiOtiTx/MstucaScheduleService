@@ -17,6 +17,7 @@ import javax.ws.rs.Produces;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 
 import schedule.Greeting;
 import schedule.entities.ELessonType;
@@ -80,8 +81,8 @@ public class GroupRestService {
 		 ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
 		 connectionSource.close();
 
-		// TableUtils.dropTable(connectionSource, Group.class, true);
-		// TableUtils.createTable(connectionSource, Group.class);
+		TableUtils.dropTable(connectionSource, Group.class, true);
+		TableUtils.createTable(connectionSource, Group.class);
 
 		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
 		// Group group = groupDao.queryForId("ASD");
