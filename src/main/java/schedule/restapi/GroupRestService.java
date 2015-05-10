@@ -50,12 +50,12 @@ public class GroupRestService {
 
 		// Map<String, String> env = System.getenv();
 
-		String url = System.getenv("OPENSHIFT_MYSQL_DB_URL");
-		String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
-		String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+		//String url = System.getenv("OPENSHIFT_MYSQL_DB_URL");
+		//String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		//String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
 
 		// String databaseUrl = "jdbc:mysql://" + localhost + ":3306/my_db";
-		url = "jdbc:" + url;
+		//url = "jdbc:" + url;
 
 		// items.add(new Group(url));
 		// items.add(new Group(username));
@@ -78,12 +78,12 @@ public class GroupRestService {
 		// Connection connection = DriverManager.getConnection(url, username,
 		// password);
 
-		ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
+		//ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
 
-		TableUtils.dropTable(connectionSource, Group.class, true);
-		TableUtils.createTable(connectionSource, Group.class);
+		//TableUtils.dropTable(connectionSource, Group.class, true);
+		//TableUtils.createTable(connectionSource, Group.class);
 
-		connectionSource.close();
+		//connectionSource.close();
 
 		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
 		// Group group = groupDao.queryForId("ASD");
@@ -91,6 +91,9 @@ public class GroupRestService {
 		// group = new Group("ASD");
 		// groupDao.create(group);
 		// }
+		
+		
+		
 
 		return items;
 		// return service.getAll();
