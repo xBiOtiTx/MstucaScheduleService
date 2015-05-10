@@ -29,7 +29,7 @@ public class GroupService implements IService<Group> {
 	public List<Group> getAll() throws Exception {
 		List<Group> items = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
-			items.add(new Group("+Group" + i));
+			items.add(new Group("-Group" + i));
 		}
 
 		// String s = "";
@@ -45,8 +45,8 @@ public class GroupService implements IService<Group> {
 		// }
 		// items.add(new Group(s));
 
-		// Context initialContext = new InitialContext();
-		// DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
+		Context initialContext = new InitialContext();
+		DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
 		//
 		// ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
 		// TableUtils.dropTable(connectionSource, Group.class, true);

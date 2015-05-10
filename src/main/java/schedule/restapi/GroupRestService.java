@@ -33,16 +33,13 @@ public class GroupRestService {
 	@Inject
 	private IService<Group> service;
 
-	//@Inject
-	//private EntityManager em;
+	// @Inject
+	// private EntityManager em;
 
 	@GET
 	@Path("/")
 	@Produces("application/vnd.customer+json")
 	public List<Group> getAll() throws Exception {
-		
-		
-		
 		return service.getAll();
 	}
 
