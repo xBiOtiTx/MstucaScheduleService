@@ -50,39 +50,40 @@ public class GroupRestService {
 
 		// Map<String, String> env = System.getenv();
 
-		 String url = System.getenv("OPENSHIFT_MYSQL_DB_URL");
-		 String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
-		 String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
-		 
-		 //String databaseUrl = "jdbc:mysql://" + localhost + ":3306/my_db";
-		 url = "jdbc:" + url;
-		 
+		String url = System.getenv("OPENSHIFT_MYSQL_DB_URL");
+		String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+
+		// String databaseUrl = "jdbc:mysql://" + localhost + ":3306/my_db";
+		url = "jdbc:" + url;
+
 		// items.add(new Group(url));
 		// items.add(new Group(username));
 		// items.add(new Group(password));
-		 
-//		String s = "";
-//		Map<String, String> env = System.getenv();
-//		for (String envName : env.keySet()) {
-//			//s += envName + "; ";
-//			// s += String.format("%s=%s%n \n",
-//			// envName,
-//			// env.get(envName));
-//			// System.out.format("%s=%s%n",
-//			// envName,
-//			// env.get(envName));
-//			items.add(new Group(envName));
-//		}
-//		
+
+		// String s = "";
+		// Map<String, String> env = System.getenv();
+		// for (String envName : env.keySet()) {
+		// //s += envName + "; ";
+		// // s += String.format("%s=%s%n \n",
+		// // envName,
+		// // env.get(envName));
+		// // System.out.format("%s=%s%n",
+		// // envName,
+		// // env.get(envName));
+		// items.add(new Group(envName));
+		// }
+		//
 
 		// Connection connection = DriverManager.getConnection(url, username,
 		// password);
 
-		 ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
-		 connectionSource.close();
+		ConnectionSource connectionSource = new JdbcConnectionSource(url, username, password);
 
 		TableUtils.dropTable(connectionSource, Group.class, true);
 		TableUtils.createTable(connectionSource, Group.class);
+
+		connectionSource.close();
 
 		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
 		// Group group = groupDao.queryForId("ASD");
