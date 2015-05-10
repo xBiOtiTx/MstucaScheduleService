@@ -45,9 +45,9 @@ public class GroupService implements IService<Group> {
 		// }
 		// items.add(new Group(s));
 
-		//Context initialContext = new InitialContext();
-		//DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
-		//
+		// Context initialContext = new InitialContext();
+		// DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
+
 		// ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
 		// TableUtils.dropTable(connectionSource, Group.class, true);
 		// TableUtils.createTable(connectionSource, Group.class);
