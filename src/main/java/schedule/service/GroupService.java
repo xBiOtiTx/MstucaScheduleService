@@ -32,7 +32,6 @@ public class GroupService implements IService<Group> {
 			items.add(new Group("_+Group" + i));
 		}
 
-		
 		// String s = "";
 		// Map<String, String> env = System.getenv();
 		// for (String envName : env.keySet()) {
@@ -46,26 +45,26 @@ public class GroupService implements IService<Group> {
 		// }
 		// items.add(new Group(s));
 
-		Context initialContext = new InitialContext();
-		DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
-
-		ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
-		TableUtils.dropTable(connectionSource, Group.class, true);
-		TableUtils.createTable(connectionSource, Group.class);
-		final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
-		Group group = groupDao.queryForId("ASD");
-		if (group == null) {
-			group = new Group("ASD");
-			groupDao.create(group);
-			group = groupDao.queryForId("ASD");
-		}
-		if(group != null) {
-		items.add(group);
-		} else {
-			items.add(new Group("error!"));
-		}
-		
-		connectionSource.close();
+		// Context initialContext = new InitialContext();
+		// DataSource datasource = (DataSource) initialContext.lookup("java:jboss/datasources/MySQLDS");
+		//
+		// ConnectionSource connectionSource = (ConnectionSource) datasource.getConnection();
+		// TableUtils.dropTable(connectionSource, Group.class, true);
+		// TableUtils.createTable(connectionSource, Group.class);
+		// final Dao<Group, String> groupDao = DaoManager.createDao(connectionSource, Group.class);
+		// Group group = groupDao.queryForId("ASD");
+		// if (group == null) {
+		// group = new Group("ASD");
+		// groupDao.create(group);
+		// group = groupDao.queryForId("ASD");
+		// }
+		// if(group != null) {
+		// items.add(group);
+		// } else {
+		// items.add(new Group("error!"));
+		// }
+		//
+		// connectionSource.close();
 
 		return items;
 	}
