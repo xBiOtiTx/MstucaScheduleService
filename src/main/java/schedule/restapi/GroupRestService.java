@@ -46,12 +46,12 @@ public class GroupRestService {
 
 		// Map<String, String> env = System.getenv();
 		
-		String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
-		String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
-		String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
+		//String url = System.getenv("OPENSHIFT_SCHEDULE_DB_URL");
+		//String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
+		//String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
 		
-		Connection connection = DriverManager.getConnection(url, username,
-	            password);
+		//Connection connection = DriverManager.getConnection(url, username,
+	   //         password);
 		
 		// ConnectionSource connectionSource = new JdbcConnectionSource(url);
 		// connectionSource.close();
