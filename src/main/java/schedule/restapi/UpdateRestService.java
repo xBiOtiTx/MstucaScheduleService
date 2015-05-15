@@ -1,7 +1,5 @@
 package schedule.restapi;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -12,26 +10,10 @@ import javax.ws.rs.Produces;
 
 import schedule.ScheduleParser;
 import schedule.ScheduleUpdater;
-import schedule.entities.ELessonType;
-import schedule.entities.Group;
 import schedule.entities.GroupDownloadLink;
-import schedule.entities.Lesson;
-import schedule.entities.LessonGroupLink;
-import schedule.entities.LessonTitle;
 import schedule.entities.RawLesson;
-import schedule.entities.Room;
-import schedule.entities.Teacher;
 import schedule.service.GroupDownloadLinkService;
-import schedule.service.contract.IGroupService;
-import schedule.service.contract.IGroupVersionService;
-import schedule.service.contract.ILessonGroupLinkService;
-import schedule.service.contract.ILessonService;
-import schedule.service.contract.ILessonTitleService;
-import schedule.service.contract.IRoomService;
-import schedule.service.contract.ITeacherService;
-import schedule.service.contract.ITeacherVersionService;
 import schedule.utils.ScheduleUtils;
-import schedule.utils.TimeWatcher;
 
 //http://localhost:8080/schedule/rest/api/update
 @Path("/api/update")
