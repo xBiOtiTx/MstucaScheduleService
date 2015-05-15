@@ -1,11 +1,11 @@
 package schedule.entities;
 
 public enum ELessonType {
-	LECTURE, // ������
-	PRACTICAL, // �� ���
-	LAB, // ��� ���
-	SEMINAR, // �������
-	EMPTY; // �����
+	LECTURE, // лекция
+	PRACTICAL, // пр зан
+	LAB, // лаб раб
+	SEMINAR, // семинар
+	EMPTY; // пусто
 
 	public static final int STATUS_LECTURE = 1;
 	public static final int STATUS_PRACTICAL = 2;
@@ -13,11 +13,11 @@ public enum ELessonType {
 	public static final int STATUS_SEMINAR = 4;
 	public static final int STATUS_EMPTY = 0;
 
-	public static final String STRING_LECTURE = "������";
-	public static final String STRING_PRACTICAL = "��.���.";
-	public static final String STRING_LAB = "���.���.";
-	public static final String STRING_SEMINAR = "�������";
-	public static final String STRING_EMPTY = "�������";
+	public static final String STRING_LECTURE = "Лекция";
+	public static final String STRING_PRACTICAL = "Пр.Зан.";
+	public static final String STRING_LAB = "Лаб.раб.";
+	public static final String STRING_SEMINAR = "Семинар";
+	public static final String STRING_EMPTY = "Семинар";
 
 	public static int toStatus(ELessonType lessonType) {
 		switch (lessonType) {
@@ -79,19 +79,19 @@ public enum ELessonType {
 	public static String getResTitle(ELessonType type) {
 		switch (type) {
 		case LECTURE:
-			return "������";
+			return "Лекция";
 
 		case PRACTICAL:
-			return "��.���.";
+			return "Пр.Зан.";
 
 		case LAB:
-			return "���.���.";
+			return "Лаб.раб.";
 
 		case SEMINAR:
-			return "�������";
+			return "Семинар";
 
 		case EMPTY:
-			return "�����";
+			return "Пусто";
 
 		default:
 			throw new IllegalArgumentException("Invalid type");

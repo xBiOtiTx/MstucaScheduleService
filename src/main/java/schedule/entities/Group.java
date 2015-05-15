@@ -1,17 +1,27 @@
 package schedule.entities;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "group")
+@Entity
+@Table(name = "groups")
 public class Group {
+	public static final String COLUMN_ID = "group_id";
 	public static final String COLUMN_TITLE = "title";
 
-	@DatabaseField(id = true, dataType = DataType.STRING, columnName = COLUMN_TITLE)
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
+
+	@Column(name = COLUMN_TITLE)
+	// , unique=true
 	private String title;
 
-	public Group() {
+	protected Group() {
 		super();
 	}
 
@@ -20,17 +30,20 @@ public class Group {
 		this.title = title;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	@Override
-	public String toString() {
-		return "Group [title=" + title + "]";
 	}
 
 	@Override
@@ -57,4 +70,10 @@ public class Group {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Group [id=" + id + ", title=" + title + "]";
+	}
+
 }

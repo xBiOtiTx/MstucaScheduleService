@@ -1,17 +1,26 @@
 package schedule.entities;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "teacher")
+@Entity
+@Table(name = "teachers")
 public class Teacher {
+	public static final String COLUMN_ID = "teacher_id";
 	public static final String COLUMN_NAME = "name";
 
-	@DatabaseField(id = true, dataType = DataType.STRING, columnName = COLUMN_NAME)
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
+
+	@Column(name = COLUMN_NAME)
 	private String name;
 
-	public Teacher() {
+	protected Teacher() {
 		super();
 	}
 
@@ -20,17 +29,20 @@ public class Teacher {
 		this.name = name;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getName() {
 		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return "Teacher [name=" + name + "]";
 	}
 
 	@Override
@@ -58,4 +70,10 @@ public class Teacher {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Teacher [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 }

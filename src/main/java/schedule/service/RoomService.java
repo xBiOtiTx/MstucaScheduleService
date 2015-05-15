@@ -11,39 +11,39 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import schedule.entities.Group;
-import schedule.service.contract.IGroupService;
+import schedule.entities.Room;
+import schedule.service.contract.IRoomService;
 
 @Stateless
-public class GroupService implements IGroupService {
+public class RoomService implements IRoomService {
 
 	@Inject
 	private EntityManager em;
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Group> getAll() throws Exception {
+	public List<Room> getAll() throws Exception {
 		Session session = em.unwrap(Session.class);
-		return session.createCriteria(Group.class).list();
+		return session.createCriteria(Room.class).list();
 	}
 
 	@Override
-	public Group getForId(long id) throws Exception {
+	public Room getForId(long id) throws Exception {
 		Session session = em.unwrap(Session.class);
-		return (Group) session.get(Group.class, id);
+		return (Room) session.get(Room.class, id);
 	}
 
-	public Group getForTitle(String title) throws Exception {
+	public Room getForTitle(String title) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Group.class);
-		Criterion criterion = Restrictions.eq(Group.COLUMN_TITLE, title);
-		return (Group) criteria.add(criterion).uniqueResult();
+		Criteria criteria = session.createCriteria(Room.class);
+		Criterion criterion = Restrictions.eq(Room.COLUMN_TITLE, title);
+		return (Room) criteria.add(criterion).uniqueResult();
 	}
 
 	@Override
-	public Group deleteForId(long id) throws Exception {
+	public Room deleteForId(long id) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Group entity = (Group) session.get(Group.class, id);
+		Room entity = (Room) session.get(Room.class, id);
 		if (entity != null) {
 			session.delete(entity);
 		}
@@ -51,19 +51,18 @@ public class GroupService implements IGroupService {
 	}
 
 	@Override
-	public Group create(Group entity) throws Exception {
+	public Room create(Room entity) throws Exception {
 		Session session = em.unwrap(Session.class);
 		session.save(entity);
 		// entity.setId((Long) session.save(entity));
 		return entity;
 	}
 
-	@Override
-	public Group createIfNotExist(Group entity) throws Exception {
+	public Room createIfNotExist(Room entity) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Group.class);
-		Criterion criterion = Restrictions.eq(Group.COLUMN_TITLE, entity.getTitle());
-		Group found = (Group) criteria.add(criterion).uniqueResult();
+		Criteria criteria = session.createCriteria(Room.class);
+		Criterion criterion = Restrictions.eq(Room.COLUMN_TITLE, entity.getTitle());
+		Room found = (Room) criteria.add(criterion).uniqueResult();
 		if (found != null) {
 			return found;
 		}
@@ -73,17 +72,17 @@ public class GroupService implements IGroupService {
 	}
 
 	@Override
-	public Group delete(Group entity) throws Exception {
+	public Room delete(Room entity) throws Exception {
 		Session session = em.unwrap(Session.class);
 		session.delete(session.contains(entity) ? entity : session.merge(entity));
 		return entity;
 	}
 
 	@Override
-	public int delete(List<Group> entities) throws Exception {
+	public int delete(List<Room> entities) throws Exception {
 		Session session = em.unwrap(Session.class);
 		int count = 0;
-		for (Group entity : entities) {
+		for (Room entity : entities) {
 			session.delete(session.contains(entity) ? entity : session.merge(entity));
 			count++;
 		}

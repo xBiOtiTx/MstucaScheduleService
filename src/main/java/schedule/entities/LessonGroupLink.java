@@ -1,24 +1,38 @@
 package schedule.entities;
 
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "lessonGroupLink")
+//@Embeddable
+@Entity
+@Table(name = "lesson_group_links")
 public class LessonGroupLink {
-	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_ID = "lesson_group_link_id";
 	public static final String COLUMN_LESSON_ID = "lesson_id";
 	public static final String COLUMN_GROUP_ID = "group_id";
 
-	@DatabaseField(generatedId = true, columnName = COLUMN_ID)
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = COLUMN_LESSON_ID)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = COLUMN_LESSON_ID)
 	private Lesson lesson;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = COLUMN_GROUP_ID)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = COLUMN_GROUP_ID)
 	private Group group;
 
-	public LessonGroupLink() {
+	protected LessonGroupLink() {
 		super();
 	}
 
@@ -28,18 +42,11 @@ public class LessonGroupLink {
 		this.group = group;
 	}
 
-	public LessonGroupLink(Integer id, Lesson lesson, Group group) {
-		super();
-		this.id = id;
-		this.lesson = lesson;
-		this.group = group;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -60,16 +67,10 @@ public class LessonGroupLink {
 	}
 
 	@Override
-	public String toString() {
-		return "LessonGroupLink [id=" + id + ", lesson=" + lesson + ", group=" + group + "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((group == null) ? 0 : group.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((lesson == null) ? 0 : lesson.hashCode());
 		return result;
 	}
@@ -88,17 +89,17 @@ public class LessonGroupLink {
 				return false;
 		} else if (!group.equals(other.group))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (lesson == null) {
 			if (other.lesson != null)
 				return false;
 		} else if (!lesson.equals(other.lesson))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "LessonGroupLink [id=" + id + ", lesson=" + lesson + ", group=" + group + "]";
 	}
 
 }

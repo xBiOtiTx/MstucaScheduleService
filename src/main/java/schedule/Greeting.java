@@ -10,7 +10,7 @@ public class Greeting {
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private String content;
 
 	protected Greeting() {

@@ -2,26 +2,35 @@ package schedule.entities;
 
 import java.util.Date;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "groupVersion")
+@Entity
+@Table(name = "group_versions")
 public class GroupVersion {
-	public static final String COLUMN_ID = "_id";
+	public static final String COLUMN_ID = "group_version_id";
 	public static final String COLUMN_GROUP_ID = "group_id";
 	public static final String COLUMN_DATE = "date";
 
-	@DatabaseField(generatedId = true, columnName = COLUMN_ID)
-	private Integer id;
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = COLUMN_GROUP_ID)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = Group.COLUMN_ID)
 	private Group group;
 
-	@DatabaseField(dataType = DataType.DATE, columnName = COLUMN_DATE)
+	@Column(name = COLUMN_DATE)
 	private Date date;
 
-	public GroupVersion() {
+	protected GroupVersion() {
 		super();
 	}
 
@@ -31,18 +40,11 @@ public class GroupVersion {
 		this.date = date;
 	}
 
-	public GroupVersion(Integer id, Group group, Date date) {
-		super();
-		this.id = id;
-		this.group = group;
-		this.date = date;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -68,7 +70,6 @@ public class GroupVersion {
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((group == null) ? 0 : group.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -91,11 +92,6 @@ public class GroupVersion {
 				return false;
 		} else if (!group.equals(other.group))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		return true;
 	}
 
@@ -103,4 +99,5 @@ public class GroupVersion {
 	public String toString() {
 		return "GroupVersion [id=" + id + ", group=" + group + ", date=" + date + "]";
 	}
+
 }

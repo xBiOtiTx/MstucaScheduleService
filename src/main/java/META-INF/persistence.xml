@@ -6,8 +6,12 @@
 		<jta-data-source>java:jboss/datasources/MySQLDS</jta-data-source>
 		<properties>
 			<!-- Properties for Hibernate -->
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.jdbc.batch_size" value="50" />
+			<property name="connection.characterEncoding" value="UTF-8" />
 		</properties>
 	</persistence-unit>
 </persistence>

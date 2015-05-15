@@ -1,17 +1,26 @@
 package schedule.entities;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "lessonTitle")
+@Entity
+@Table(name = "lesson_titles")
 public class LessonTitle {
+	public static final String COLUMN_ID = "lesson_title_id";
 	public static final String COLUMN_TITLE = "title";
 
-	@DatabaseField(id = true, dataType = DataType.STRING, columnName = COLUMN_TITLE)
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
+
+	@Column(name = COLUMN_TITLE)
 	private String title;
 
-	public LessonTitle() {
+	protected LessonTitle() {
 		super();
 	}
 
@@ -20,17 +29,20 @@ public class LessonTitle {
 		this.title = title;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	@Override
-	public String toString() {
-		return "LessonName [title=" + title + "]";
 	}
 
 	@Override
@@ -58,4 +70,10 @@ public class LessonTitle {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "LessonTitle [id=" + id + ", title=" + title + "]";
+	}
+	
+	
 }

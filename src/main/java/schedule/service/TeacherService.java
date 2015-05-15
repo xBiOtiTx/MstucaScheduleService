@@ -11,39 +11,39 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 
-import schedule.entities.Group;
-import schedule.service.contract.IGroupService;
+import schedule.entities.Teacher;
+import schedule.service.contract.ITeacherService;
 
 @Stateless
-public class GroupService implements IGroupService {
+public class TeacherService implements ITeacherService {
 
 	@Inject
 	private EntityManager em;
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Group> getAll() throws Exception {
+	public List<Teacher> getAll() throws Exception {
 		Session session = em.unwrap(Session.class);
-		return session.createCriteria(Group.class).list();
+		return session.createCriteria(Teacher.class).list();
 	}
 
 	@Override
-	public Group getForId(long id) throws Exception {
+	public Teacher getForId(long id) throws Exception {
 		Session session = em.unwrap(Session.class);
-		return (Group) session.get(Group.class, id);
+		return (Teacher) session.get(Teacher.class, id);
 	}
 
-	public Group getForTitle(String title) throws Exception {
+	public Teacher getForName(String name) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Group.class);
-		Criterion criterion = Restrictions.eq(Group.COLUMN_TITLE, title);
-		return (Group) criteria.add(criterion).uniqueResult();
+		Criteria criteria = session.createCriteria(Teacher.class);
+		Criterion criterion = Restrictions.eq(Teacher.COLUMN_NAME, name);
+		return (Teacher) criteria.add(criterion).uniqueResult();
 	}
 
 	@Override
-	public Group deleteForId(long id) throws Exception {
+	public Teacher deleteForId(long id) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Group entity = (Group) session.get(Group.class, id);
+		Teacher entity = (Teacher) session.get(Teacher.class, id);
 		if (entity != null) {
 			session.delete(entity);
 		}
@@ -51,19 +51,18 @@ public class GroupService implements IGroupService {
 	}
 
 	@Override
-	public Group create(Group entity) throws Exception {
+	public Teacher create(Teacher entity) throws Exception {
 		Session session = em.unwrap(Session.class);
 		session.save(entity);
 		// entity.setId((Long) session.save(entity));
 		return entity;
 	}
 
-	@Override
-	public Group createIfNotExist(Group entity) throws Exception {
+	public Teacher createIfNotExist(Teacher entity) throws Exception {
 		Session session = em.unwrap(Session.class);
-		Criteria criteria = session.createCriteria(Group.class);
-		Criterion criterion = Restrictions.eq(Group.COLUMN_TITLE, entity.getTitle());
-		Group found = (Group) criteria.add(criterion).uniqueResult();
+		Criteria criteria = session.createCriteria(Teacher.class);
+		Criterion criterion = Restrictions.eq(Teacher.COLUMN_NAME, entity.getName());
+		Teacher found = (Teacher) criteria.add(criterion).uniqueResult();
 		if (found != null) {
 			return found;
 		}
@@ -73,17 +72,17 @@ public class GroupService implements IGroupService {
 	}
 
 	@Override
-	public Group delete(Group entity) throws Exception {
+	public Teacher delete(Teacher entity) throws Exception {
 		Session session = em.unwrap(Session.class);
 		session.delete(session.contains(entity) ? entity : session.merge(entity));
 		return entity;
 	}
 
 	@Override
-	public int delete(List<Group> entities) throws Exception {
+	public int delete(List<Teacher> entities) throws Exception {
 		Session session = em.unwrap(Session.class);
 		int count = 0;
-		for (Group entity : entities) {
+		for (Teacher entity : entities) {
 			session.delete(session.contains(entity) ? entity : session.merge(entity));
 			count++;
 		}

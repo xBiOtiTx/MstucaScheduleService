@@ -2,26 +2,35 @@ package schedule.entities;
 
 import java.util.Date;
 
-import com.j256.ormlite.field.DataType;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@DatabaseTable(tableName = "teacherVersion")
+@Entity
+@Table(name = "teacher_versions")
 public class TeacherVersion {
-	public static final String COLUMN_ID = "_id";
-	public static final String COLUMN_TEACHER_ID = "teacher_id";
+	public static final String COLUMN_ID = "teacher_version_id";
+	public static final String COLUMN_TEACHER_ID = Teacher.COLUMN_ID;
 	public static final String COLUMN_DATE = "date";
 
-	@DatabaseField(generatedId = true, columnName = COLUMN_ID)
-	private Integer id;
+	@Id
+	@GeneratedValue
+	@Column(name = COLUMN_ID, nullable = false)
+	private Long id;
 
-	@DatabaseField(foreign = true, foreignAutoRefresh = true, columnName = COLUMN_TEACHER_ID)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = Teacher.COLUMN_ID, referencedColumnName = COLUMN_TEACHER_ID)
 	private Teacher teacher;
 
-	@DatabaseField(dataType = DataType.DATE, columnName = COLUMN_DATE)
+	@Column(name = COLUMN_DATE)
 	private Date date;
 
-	public TeacherVersion() {
+	protected TeacherVersion() {
 		super();
 	}
 
@@ -31,18 +40,11 @@ public class TeacherVersion {
 		this.date = date;
 	}
 
-	public TeacherVersion(Integer id, Teacher teacher, Date date) {
-		super();
-		this.id = id;
-		this.teacher = teacher;
-		this.date = date;
-	}
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,7 +69,6 @@ public class TeacherVersion {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((teacher == null) ? 0 : teacher.hashCode());
 		return result;
 	}
@@ -86,11 +87,6 @@ public class TeacherVersion {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
 		if (teacher == null) {
 			if (other.teacher != null)
 				return false;
@@ -103,5 +99,7 @@ public class TeacherVersion {
 	public String toString() {
 		return "TeacherVersion [id=" + id + ", teacher=" + teacher + ", date=" + date + "]";
 	}
+	
+	
 
 }
