@@ -39,10 +39,6 @@ import schedule.utils.TimeWatcher;
 
 // TODO ScheduleUpdaterService
 public class ScheduleUpdater {
-	public void hi() {
-		System.out.println("hi2");
-	}
-
 	@Inject
 	private IGroupService groupService;
 

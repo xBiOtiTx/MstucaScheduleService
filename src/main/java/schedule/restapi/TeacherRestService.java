@@ -1,6 +1,5 @@
 package schedule.restapi;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateful;
@@ -11,13 +10,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import schedule.entities.Group;
-import schedule.entities.GroupVersion;
 import schedule.entities.Lesson;
-import schedule.entities.LessonGroupLink;
-import schedule.service.contract.IGroupService;
-import schedule.service.contract.IGroupVersionService;
-import schedule.service.contract.ILessonGroupLinkService;
+import schedule.entities.Teacher;
+import schedule.entities.TeacherVersion;
+import schedule.service.contract.ILessonService;
+import schedule.service.contract.ITeacherService;
+import schedule.service.contract.ITeacherVersionService;
 
 @Path("/api/teachers")
 @RequestScoped
@@ -25,51 +23,42 @@ import schedule.service.contract.ILessonGroupLinkService;
 public class TeacherRestService {
 
 	@Inject
-	private IGroupService groupService;
+	private ITeacherService teacherService;
 
 	@Inject
-	private ILessonGroupLinkService lessonGroupLinkService;
+	private ILessonService lessonService;
 
 	@Inject
-	private IGroupVersionService groupVersionService;
-
-	private List<Lesson> getLessons(List<LessonGroupLink> links) {
-		List<Lesson> lessons = new ArrayList<Lesson>(links.size());
-		for (LessonGroupLink link : links) {
-			lessons.add(link.getLesson());
-		}
-		return lessons;
-	}
+	private ITeacherVersionService teacherVersionService;
 
 	@GET
 	@Path("/")
 	@Produces("application/vnd.customer+json")
-	public List<Group> getAll() throws Exception {
-		return groupService.getAll();
+	public List<Teacher> getAll() throws Exception {
+		return teacherService.getAll();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces("application/vnd.customer+json")
-	public Group get(@PathParam("id") Long id) throws Exception {
-		return groupService.getForId(id);
+	public Teacher get(@PathParam("id") Long id) throws Exception {
+		return teacherService.getForId(id);
 	}
 
 	@GET
 	@Path("/{id}/lessons")
 	@Produces("application/vnd.customer+json")
 	public List<Lesson> getLessons(@PathParam("id") Long id) throws Exception {
-		Group group = groupService.getForId(id);
-		List<LessonGroupLink> links = lessonGroupLinkService.getForGroup(group);
-		return getLessons(links);
+		Teacher teacher = teacherService.getForId(id);
+		return lessonService.getForTeacher(teacher);
 	}
 
 	@GET
 	@Path("/{id}/version")
 	@Produces("application/vnd.customer+json")
-	public GroupVersion getVersion(@PathParam("id") Long id) throws Exception {
-		Group group = groupService.getForId(id);
-		GroupVersion version = groupVersionService.getForGroup(group);
+	public TeacherVersion getVersion(@PathParam("id") Long id) throws Exception {
+		Teacher teacher = teacherService.getForId(id);
+		TeacherVersion version = teacherVersionService.getForTeacher(teacher);
 		return version;
 	}
 }

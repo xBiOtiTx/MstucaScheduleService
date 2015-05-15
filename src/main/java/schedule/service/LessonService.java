@@ -6,9 +6,14 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 
 import schedule.entities.Lesson;
+import schedule.entities.Room;
+import schedule.entities.Teacher;
 import schedule.service.contract.ILessonService;
 
 @Stateless
@@ -28,6 +33,22 @@ public class LessonService implements ILessonService {
 	public Lesson getForId(long id) throws Exception {
 		Session session = em.unwrap(Session.class);
 		return (Lesson) session.get(Lesson.class, id);
+	}
+
+	@Override
+	public List<Lesson> getForTeacher(Teacher teacher) throws Exception {
+		Session session = em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Lesson.class);
+		Criterion criterion = Restrictions.eq("teacher.id", teacher.getId());
+		return criteria.add(criterion).list();
+	}
+
+	@Override
+	public List<Lesson> getForRoom(Room room) throws Exception {
+		Session session = em.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Lesson.class);
+		Criterion criterion = Restrictions.eq("room.id", room.getId());
+		return criteria.add(criterion).list();
 	}
 
 	@Override
